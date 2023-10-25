@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter.scrolledtext import ScrolledText as st
 from tkinter import messagebox as mb
 from tkinter import filedialog as fd
+import os
 
 #  Создание главного окна
 window = tk.Tk()
@@ -36,7 +37,8 @@ output_text.grid(row=3, column=1, padx=10, pady=10, sticky="w")
 
 # Диалог открытия файла
 def do_dialog():
-    name = fd.askopenfile()
+    my_dir = os.getcwd()
+    name = fd.askopenfilename(initialdir=my_dir)
     return name
 
 
