@@ -1,6 +1,7 @@
 # Программа анализа .csv файлов
 
 import tkinter as tk
+from tkinter.scrolledtext import ScrolledText as st
 
 #  Создание главного окна
 window = tk.Tk()
@@ -26,6 +27,9 @@ lbl_20.grid(row=2, column=0, padx=10, pady=10, sticky="e")
 lbl_21 = tk.Label(text="")
 lbl_21.grid(row=2, column=1, sticky="w")
 
+# Создание текстового вывода
+output_text = st(height=22, width=50)
+output_text.grid(row=3, column=1, padx=10, pady=10, sticky="w")
 
 
 # Запуск цикла mainloop
