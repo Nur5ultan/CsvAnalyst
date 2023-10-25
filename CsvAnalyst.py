@@ -31,6 +31,10 @@ lbl_21.grid(row=2, column=1, sticky="w")
 output_text = st(height=22, width=50)
 output_text.grid(row=3, column=1, padx=10, pady=10, sticky="w")
 
+# Создание кнопки
+btn = tk.Button(window, text="Прочитать файл")
+btn.grid(row=4, column=1)
+
 
 # Запуск цикла mainloop
 window.mainloop()
