@@ -5,6 +5,7 @@ from tkinter.scrolledtext import ScrolledText as st
 from tkinter import messagebox as mb
 from tkinter import filedialog as fd
 import os
+import pandas as pd
 
 #  Создание главного окна
 window = tk.Tk()
@@ -42,9 +43,21 @@ def do_dialog():
     return name
 
 
+# Обработчик csv файла при помощи pandas
+def pandas_read_csv(file_name):
+    df = pd.read_csv(file_name, header=None, sep=";")
+    count_rows = df.shape[0]
+    count_columns = df.shape[1]
+    lbl_11["text"] = count_rows
+    lbl_21["text"] = count_columns
+    return df
+
+
 # Обработчик нажатия кнопки
 def process_btn():
-    do_dialog()
+    file_name = do_dialog()
+    lbl_01["text"] = file_name
+    pandas_read_csv(file_name)
     mb.showinfo(title=None, message="Готово")
 
 
