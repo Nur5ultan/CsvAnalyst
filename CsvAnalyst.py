@@ -43,7 +43,7 @@ def do_dialog():
     return name
 
 
-# Обработчик csv файла при помощи pandas
+# Обработка csv файла при помощи pandas
 def pandas_read_csv(file_name):
     df = pd.read_csv(file_name, header=None, sep=";")
     count_rows = df.shape[0]
@@ -53,11 +53,23 @@ def pandas_read_csv(file_name):
     return df
 
 
+# Выборка стобца в список
+def get_column(df, column_ix):
+    count_rows = df.shape[0]
+    lst = []
+    for i in range(count_rows):
+        lst.append(df.iat[i, column_ix])
+    return lst
+
+
 # Обработчик нажатия кнопки
 def process_btn():
     file_name = do_dialog()
     lbl_01["text"] = file_name
-    pandas_read_csv(file_name)
+    df = pandas_read_csv(file_name)
+    lst = get_column(df, 0)
+    for item in lst:
+        output_text.insert(tk.END, str(item) + os.linesep)
     mb.showinfo(title=None, message="Готово")
 
 
