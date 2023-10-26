@@ -53,7 +53,7 @@ def pandas_read_csv(file_name):
     return df
 
 
-# Выборка стобца в список
+# Выборка столбца в список
 def get_column(df, column_ix):
     count_rows = df.shape[0]
     lst = []
@@ -67,7 +67,7 @@ def process_btn():
     file_name = do_dialog()
     lbl_01["text"] = file_name
     df = pandas_read_csv(file_name)
-    lst = get_column(df, 0)
+    lst = get_column(df, 2)
     for item in lst:
         output_text.insert(tk.END, str(item) + os.linesep)
     mb.showinfo(title=None, message="Готово")
