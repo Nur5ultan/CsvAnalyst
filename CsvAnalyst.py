@@ -62,6 +62,32 @@ def get_column(df, column_ix):
     return lst
 
 
+# Если в этом поле имя, пусть вернет True
+def meet_name(field):
+    checkfor = [
+        "Вера",
+        "Анатолий",
+        "Мария",
+        "Артём",
+        "Алексей",
+        "Валерия",
+        "Наталья",
+        "Оксана",
+        "Галина",
+        "Марина",
+        "Вероника",
+        "Виталий",
+        "Борис",
+        "Диана",
+        "Ева",
+    ]
+    for s in checkfor:
+        if s in str(field):  # Нашлось
+            return True
+    # Ничего не нашлось
+    return False
+
+
 # Обработчик нажатия кнопки
 def process_btn():
     file_name = do_dialog()
@@ -69,7 +95,7 @@ def process_btn():
     df = pandas_read_csv(file_name)
     lst = get_column(df, 2)
     for item in lst:
-        output_text.insert(tk.END, str(item) + os.linesep)
+        output_text.insert(tk.END, str(item) + "  " + str(meet_name(item)) + os.linesep)
     mb.showinfo(title=None, message="Готово")
 
 
