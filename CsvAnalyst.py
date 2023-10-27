@@ -103,18 +103,24 @@ def list_meet_name(fields_list):
     return False
 
 
+# Пройти все столбцы
+def check_all_columns(df):
+    columns_count = df.shape[1]
+    for i in range(columns_count):  # от 0 до columns_count-1
+        lst = get_column(df, i)
+        if list_meet_name(lst):
+            output_text.insert(tk.END, "В столбце " + str(i + 1) + " предположительно содержится имя." + os.linesep)
+        else:
+            output_text.insert(tk.END, "Предположений для столбца " + str(i + 1) + " не найдено." + os.linesep)
+
+
 # Обработчик нажатия кнопки
 def process_btn():
     file_name = do_dialog()
     lbl_01["text"] = file_name
     df = pandas_read_csv(file_name)
     lst = get_column(df, 2)
-    if list_meet_name(lst):
-        output_text.insert(
-            tk.END, "В списке предположительно содержится имя." + os.linesep
-        )
-    else:
-        output_text.insert(tk.END, "Предположений для списка не найдено." + os.linesep)
+    check_all_columns(df)
     mb.showinfo(title=None, message="Готово")
 
 
