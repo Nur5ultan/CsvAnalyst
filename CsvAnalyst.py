@@ -97,10 +97,11 @@ def list_meet_name(fields_list):
         if meet_name(list_item):
             counter_meet += 1
     # Конец подсчёта
-    if counter_meet / counter_total > 0.1:
-        return True
+    ratio = counter_meet / counter_total
+    if ratio > 0.1:
+        return True, ratio
     # Не набралось нужного количество совпадений
-    return False
+    return False, ratio
 
 
 # Пройти все столбцы
@@ -108,18 +109,18 @@ def check_all_columns(df):
     columns_count = df.shape[1]
     for i in range(columns_count):  # от 0 до columns_count-1
         lst = get_column(df, i)
-        if list_meet_name(lst):
-            output_text.insert(tk.END, "В столбце " + str(i + 1) + " предположительно содержится имя." + os.linesep)
+        result = list_meet_name(lst)
+        if result[0]:
+            output_text.insert(tk.END, "В столбце " + str(i+1) + " предположительно содержится имя." + os.linesep)
+            output_text.insert(tk.END, "Процент совпадений " + "{:.2f}".format(result[1] * 100) + "%." + os.linesep)
         else:
-            output_text.insert(tk.END, "Предположений для столбца " + str(i + 1) + " не найдено." + os.linesep)
-
+            output_text.insert(tk.END, "Предположений для столбца " + str(i+1) + " не найдено." + os.linesep)
 
 # Обработчик нажатия кнопки
 def process_btn():
     file_name = do_dialog()
     lbl_01["text"] = file_name
     df = pandas_read_csv(file_name)
-    lst = get_column(df, 2)
     check_all_columns(df)
     mb.showinfo(title=None, message="Готово")
 
